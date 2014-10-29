@@ -12,11 +12,10 @@ public class TrueFalse  extends Question{
 			System.out.println("Is the answer true or false?");
 			answer = scanner.nextLine().trim().toLowerCase()=="true"?true:false;
 		}
-		scanner.close();
 	}
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

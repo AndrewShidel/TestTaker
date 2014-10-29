@@ -7,6 +7,7 @@ public class MultipleChoice  extends Question{
 	private ArrayList<String> choices;
 	private int answer;
 	public MultipleChoice(boolean needsAnswer){
+		choices = new ArrayList<String>();
 		System.out.println("Enter the prompt for your Multiple Choice question:");
 		Scanner scanner = new Scanner(System.in);
 		prompt = scanner.nextLine();
@@ -20,11 +21,10 @@ public class MultipleChoice  extends Question{
 			System.out.println("Enter the correct choice: ");
 			answer = scanner.nextInt();
 		}
-		scanner.close();
 	}
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

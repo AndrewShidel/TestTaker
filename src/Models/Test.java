@@ -10,7 +10,6 @@ public class Test extends Document{
 		System.out.println("What is the name of this Document? ");
 		Scanner scanner = new Scanner(System.in);
 		name  = scanner.nextLine();
-		scanner.close();
 	}
 	@Override
 	public void display(){

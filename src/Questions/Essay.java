@@ -7,7 +7,6 @@ public class Essay extends Question{
 		System.out.println("Enter the prompt for your Essay question:");
 		Scanner scanner = new Scanner(System.in);
 		prompt = scanner.nextLine();
-		scanner.close();
 	}
 	@Override
 	public void display() {

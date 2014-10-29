@@ -53,7 +53,7 @@ public class MainMenu {
 		System.out.println(displayStr);
 		Scanner reader = new Scanner(System.in);
 		String input = reader.nextLine();
-		reader.close();
+		//reader.close();
 		int choice;
 		try{
 			choice = Integer.parseInt(input);

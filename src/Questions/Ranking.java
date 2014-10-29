@@ -32,11 +32,10 @@ public class Ranking  extends Question{
 				items.put(i, item);
 			}
 		}
-		scanner.close();
 	}
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

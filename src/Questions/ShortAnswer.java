@@ -12,11 +12,10 @@ public class ShortAnswer  extends Question{
 			System.out.println("Enter the correct answer: ");
 			answer = scanner.nextLine();
 		}
-		scanner.close();
 	}
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

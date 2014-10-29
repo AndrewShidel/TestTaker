@@ -17,7 +17,7 @@ public class TestCreator {
 		boolean needsAnswer = test.equals(DocumentType.Test);
 		if (needsAnswer)
 			document = new Test();
-		else 
+		else
 			document = new Survay();
 		while(true){
 			switch(showMainPrompt()){
@@ -55,7 +55,7 @@ public class TestCreator {
 		System.out.println(displayStr);
 		Scanner reader = new Scanner(System.in);
 		String input = reader.nextLine();
-		reader.close();
+		//reader.close();
 		int choice;
 		try{
 			choice = Integer.parseInt(input);

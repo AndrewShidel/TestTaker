@@ -8,5 +8,5 @@ public abstract class Document {
 		for (Question question: questions)
 			question.display();
 	}
-	public void add(Question question){}
+	public void add(Question question){questions}
 }
