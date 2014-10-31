@@ -1,24 +1,17 @@
 package Controllers;
-import java.util.Scanner;
-
 import Models.Document;
 import Models.DocumentType;
-import Models.Survay;
-import Models.Test;
 import Questions.*;
 
 public class TestCreator {
-	public static Document createTest(){
-		return null;
-	}
-
-	public static Document createTest(DocumentType test) {
-		Document document;
-		boolean needsAnswer = test.equals(DocumentType.Test);
-		if (needsAnswer)
-			document = new Test();
-		else
-			document = new Survay();
+	/**
+	 * Prompt the user for information, and create a new document
+	 * @param docType The type of document to create
+	 * @return The newly created Document
+	 */
+	public static Document createTest(DocumentType docType) {
+		Document document = new Document();
+		boolean needsAnswer = docType.equals(DocumentType.Test);
 		while(true){
 			switch(showMainPrompt()){
 			case 1:
@@ -52,16 +45,8 @@ public class TestCreator {
 			+"5) Add a new ranking question\n"
 			+"6) Add a new matching question\n"
 			+"7) Finish";
-		System.out.println(displayStr);
-		Scanner reader = new Scanner(System.in);
-		String input = reader.nextLine();
-		//reader.close();
-		int choice;
-		try{
-			choice = Integer.parseInt(input);
-			if (choice<1 || choice > 7)
-				throw new NumberFormatException();
-		}catch(NumberFormatException e){
+		int choice = InputHandler.getInt(displayStr);
+		if (choice<1 || choice > 7){
 			System.out.println("Invalid Choice.\n");
 			return showMainPrompt();
 		}

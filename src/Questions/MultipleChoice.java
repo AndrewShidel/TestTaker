@@ -1,30 +1,36 @@
 package Questions;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import Controllers.InputHandler;
 
 public class MultipleChoice  extends Question{
+	private static final long serialVersionUID = 870500995185622824L;
 	private ArrayList<String> choices;
-	private int answer;
+	private ArrayList<String> answers;
 	public MultipleChoice(boolean needsAnswer){
 		choices = new ArrayList<String>();
-		System.out.println("Enter the prompt for your Multiple Choice question:");
-		Scanner scanner = new Scanner(System.in);
-		prompt = scanner.nextLine();
-		System.out.println("Enter the number of choices:");
-		int numChoices = scanner.nextInt();
-		for (int i=0; i<numChoices; i++){
-			System.out.println("Enter choice #"+i+":");
-			choices.add(scanner.nextLine());
+		answers = new ArrayList<String>();
+		prompt = InputHandler.getString("Enter the prompt for your Multiple Choice question:");
+		int numChoices = InputHandler.getInt("Enter the number of choices: ");
+		for (int i=1; i<=numChoices; i++){
+			choices.add(InputHandler.getString("Enter choice #"+i+":"));
 		}
 		if (needsAnswer){
-			System.out.println("Enter the correct choice: ");
-			answer = scanner.nextInt();
+			int numberOfAnswers = InputHandler.getInt("How many answers are correct? ");
+			for (int i=0; i<numberOfAnswers; i++){
+				answers.add(InputHandler.getString("Enter a correct choice: "));
+			}
 		}
 	}
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
-
+		System.out.println(prompt);
+		int count = 0;
+		for (String item: choices){
+			System.out.println("\t"+('a'+count)+"). "+item);
+		}
+		if (answers.size()>0){
+			System.out.println("The answers are: " + answers.toString());
+		}
 	}
 }

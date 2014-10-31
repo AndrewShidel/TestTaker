@@ -1,26 +1,22 @@
 package Questions;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Scanner;
+import java.util.HashMap;
+import Controllers.InputHandler;
 
 public class Ranking  extends Question{
-	private Dictionary<Integer, String> items;
+	private static final long serialVersionUID = -5166990686935315729L;
+	private HashMap<Integer, String> items;
 	private boolean hasAnswer;
 	public Ranking(boolean needsAnswer){
+		items = new HashMap<Integer, String>();
 		hasAnswer = needsAnswer;
-		System.out.println("Enter the prompt for your Multiple Choice question:");
-		Scanner scanner = new Scanner(System.in);
-		prompt = scanner.nextLine();
-		System.out.println("Enter the number of items:");
-		int numChoices = scanner.nextInt();
-		for (int i=0; i<numChoices; i++){
-			System.out.println("Enter item #"+i+":");
-			String item = scanner.nextLine();
+		prompt = InputHandler.getString("Enter the prompt for your Multiple Choice question:");
+		int numChoices = InputHandler.getInt("Enter the number of items: ");
+		for (int i=1; i<=numChoices; i++){
+			String item = InputHandler.getString("Enter item #"+i+":");
 			if (hasAnswer){
 				while (true){
-					System.out.println("Enter the rank of this item:");
-					int rank = scanner.nextInt();
+					int rank = InputHandler.getInt("Enter the rank of this item:");
 					if (items.get(rank)==null){
 						System.out.println("That rank has already been taken.");
 						continue;
@@ -35,7 +31,15 @@ public class Ranking  extends Question{
 	}
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
-
+		System.out.println(prompt);
+		for (int key: items.keySet()){
+			System.out.println("\t-" + items.get(key));
+		}
+		if (hasAnswer){
+			System.out.println("The correct ranking is:");
+			for (int key=0; key < items.size(); key++){
+				System.out.println("\t-" + items.get(key));
+			}
+		}
 	}
 }

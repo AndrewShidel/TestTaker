@@ -1,21 +1,21 @@
 package Questions;
 
-import java.util.Scanner;
+import Controllers.InputHandler;
 
 public class TrueFalse  extends Question{
-	private boolean answer;
+	private static final long serialVersionUID = -4562128543020835558L;
+	private Boolean answer;
 	public TrueFalse(boolean needsAnswer){
-		System.out.println("Enter the prompt for your True/False question:");
-		Scanner scanner = new Scanner(System.in);
-		prompt = scanner.nextLine();
+		prompt = InputHandler.getString("Enter the prompt for your True/False question:");
 		if (needsAnswer){
-			System.out.println("Is the answer true or false?");
-			answer = scanner.nextLine().trim().toLowerCase()=="true"?true:false;
+			answer = InputHandler.getString("Is the answer true or false?").trim().toLowerCase()=="true"?true:false;
 		}
 	}
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
-
+		System.out.println(prompt);
+		if (answer!=null){
+			System.out.println("The answer is: " + answer);
+		}
 	}
 }
