@@ -15,18 +15,28 @@ public class Ranking  extends Question{
 		for (int i=1; i<=numChoices; i++){
 			String item = InputHandler.getString("Enter item #"+i+":");
 			if (hasAnswer){
-				while (true){
-					int rank = InputHandler.getInt("Enter the rank of this item:");
-					if (items.get(rank)==null){
-						System.out.println("That rank has already been taken.");
-						continue;
-					}
-					items.put(rank, item);
-					break;
-				}
+				setCorrectAnswer(item);
 			}else{
 				items.put(i, item);
 			}
+		}
+	}
+	@Override
+	public void setCorrectAnswer() {
+		for (int i=1; i<=items.size(); i++){
+			String item = InputHandler.getString("Enter item #"+i+":");
+			setCorrectAnswer(item);
+		}
+	}
+	public void setCorrectAnswer(String item) {
+		while (true){
+			int rank = InputHandler.getInt("Enter the rank of this item:");
+			if (items.get(rank)!=null){
+				System.out.println("That rank has already been taken.");
+				continue;
+			}
+			items.put(rank, item);
+			break;
 		}
 	}
 	@Override
@@ -37,7 +47,7 @@ public class Ranking  extends Question{
 		}
 		if (hasAnswer){
 			System.out.println("The correct ranking is:");
-			for (int key=0; key < items.size(); key++){
+			for (int key=1; key <= items.size(); key++){
 				System.out.println("\t-" + items.get(key));
 			}
 		}

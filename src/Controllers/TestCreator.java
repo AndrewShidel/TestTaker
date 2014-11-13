@@ -10,7 +10,7 @@ public class TestCreator {
 	 * @return The newly created Document
 	 */
 	public static Document createTest(DocumentType docType) {
-		Document document = new Document();
+		Document document = new Document(docType);
 		boolean needsAnswer = docType.equals(DocumentType.Test);
 		while(true){
 			switch(showMainPrompt()){

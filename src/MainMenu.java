@@ -38,12 +38,25 @@ public class MainMenu {
 			case 7:
 			case 8:
 				if (currentDocument==null){
-					System.out.println("Please create or load a test/survay. ");
+					System.out.println("Please create or load a test/survay.");
 					continue;
 				}
 				TestIO.save(currentDocument);
 				break;
 			case 9:
+			case 10:
+				if (currentDocument==null){
+					System.out.println("Please create or load a test/survay.");
+					continue;
+				}
+				TestModifier.modify(currentDocument);
+				break;
+			case 11:
+			case 12:
+			case 13:
+			case 14:
+			case 15:
+			case 16:
 				return;
 			}
 		}
@@ -64,9 +77,16 @@ public class MainMenu {
 				+"6) Load a Test\n" 
 				+"7) Save a Survey\n"
 				+"8) Save a Test\n" 
-				+"9) Quit\n";
+				+ "9) Modify an Existing Survey\n"
+				+"10) Modify an Existing Test\n"
+				+"11) Take a Survey\n"
+				+"12) Take a Test\n" 
+				+"13) Grade a Test\n"
+				+"14) Tabulate a Survey\n"
+				+"15) Tabulate a Test\n"
+				+"16) Quit \n";
 		int choice = InputHandler.getInt(displayStr);
-		if (choice<1 || choice > 9){
+		if (choice<1 || choice > 16){
 			System.out.println("Invalid Choice.\n");
 			return showMainPrompt();
 		}

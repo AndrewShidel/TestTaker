@@ -8,8 +8,12 @@ public class TrueFalse  extends Question{
 	public TrueFalse(boolean needsAnswer){
 		prompt = InputHandler.getString("Enter the prompt for your True/False question:");
 		if (needsAnswer){
-			answer = InputHandler.getString("Is the answer true or false?").trim().toLowerCase()=="true"?true:false;
+			setCorrectAnswer();
 		}
+	}
+	@Override
+	public void setCorrectAnswer() {
+		answer = InputHandler.getString("Is the answer true or false?").trim().toLowerCase()=="true"?true:false;
 	}
 	@Override
 	public void display() {

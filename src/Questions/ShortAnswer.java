@@ -8,8 +8,12 @@ public class ShortAnswer  extends Question{
 	public ShortAnswer(boolean needsAnswer){
 		prompt = InputHandler.getString("Enter the prompt for your Short Answer question:");
 		if (needsAnswer){
-			answer = InputHandler.getString("Enter the correct answer: ");
+			setCorrectAnswer();
 		}
+	}
+	@Override
+	public void setCorrectAnswer() {
+		answer = InputHandler.getString("Enter the correct answer: ");
 	}
 	@Override
 	public void display() {

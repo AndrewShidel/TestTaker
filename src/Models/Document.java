@@ -12,16 +12,22 @@ public class Document implements Serializable{
 	private static final long serialVersionUID = -4237689455651023962L;
 	protected String name;
 	protected ArrayList<Question> questions;
-	public Document(){
+	public DocumentType docType;
+	public Document(DocumentType docType){
 		questions = new ArrayList<Question>();
 		name  = InputHandler.getString("What is the name of this Document?");
+		this.docType = docType;
 	}
 	/**
 	 * Displays the document
 	 */
 	public void display(){
-		for (Question question: questions)
+		int count = 0;
+		for (Question question: questions){
+			count++;
+			System.out.print(count + ").");
 			question.display();
+		}
 	}
 	/**
 	 * Adds a new question to the Document
@@ -36,5 +42,11 @@ public class Document implements Serializable{
 	 */
 	public String getName(){
 		return name;
+	}
+	public int getQuestionCount() {
+		 return questions.size();
+	}
+	public Question getQuestion(int index){
+		return questions.get(index);
 	}
 }

@@ -16,10 +16,14 @@ public class MultipleChoice  extends Question{
 			choices.add(InputHandler.getString("Enter choice #"+i+":"));
 		}
 		if (needsAnswer){
-			int numberOfAnswers = InputHandler.getInt("How many answers are correct? ");
-			for (int i=0; i<numberOfAnswers; i++){
-				answers.add(InputHandler.getString("Enter a correct choice: "));
-			}
+			setCorrectAnswer();
+		}
+	}
+	@Override
+	public void setCorrectAnswer() {
+		int numberOfAnswers = InputHandler.getInt("How many answers are correct? ");
+		for (int i=0; i<numberOfAnswers; i++){
+			answers.add(InputHandler.getString("Enter a correct choice: "));
 		}
 	}
 	@Override
@@ -32,5 +36,8 @@ public class MultipleChoice  extends Question{
 		if (answers.size()>0){
 			System.out.println("The answers are: " + answers.toString());
 		}
+	}
+	public void changeAnswer(int index, String value){
+		answers.set(index, value);
 	}
 }

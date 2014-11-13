@@ -22,10 +22,14 @@ public class Matching  extends Question{
 			col2Choices.add(InputHandler.getString("Enter column 2 row "+i+":"));
 		}
 		if (needsAnswer){
-			for (int i=1; i<=col1Choices.size(); i++){
-				int choice = InputHandler.getInt("Which item in column 2 matches item "+i+" from column 1?");
-				answer.put(i, choice);
-			}
+			setCorrectAnswer();
+		}
+	}
+	@Override
+	public void setCorrectAnswer() {
+		for (int i=1; i<=col1Choices.size(); i++){
+			int choice = InputHandler.getInt("Which item in column 2 matches item "+i+" from column 1?");
+			answer.put(i, choice);
 		}
 	}
 	@Override
@@ -43,4 +47,5 @@ public class Matching  extends Question{
 			}
 		}
 	}
+
 }

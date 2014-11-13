@@ -24,6 +24,14 @@ public class InputHandler {
 		}
 		return input;
 	}
+	public static int getInt(String prompt, int from, int to){
+		int choice = getInt(prompt);
+		if (choice < from || choice > to){
+			System.out.println("Choice is out of range");
+			return getInt(prompt, from, to);
+		}
+		return choice;
+	}
 	/**
 	 * Get a sting from the command line
 	 * @param prompt A string to display
@@ -35,5 +43,9 @@ public class InputHandler {
 		System.out.println(prompt);
 		input = scanner.nextLine();
 		return input;
+	}
+	
+	public static boolean getYesOrNo(String prompt){
+		return getString(prompt).toLowerCase().indexOf("yes")>=0;
 	}
 }

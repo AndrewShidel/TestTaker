@@ -11,4 +11,6 @@ public class Essay extends Question{
 	public void display() {
 		System.out.println(prompt);
 	}
+	@Override
+	public void setCorrectAnswer() {}
 }

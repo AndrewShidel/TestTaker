@@ -16,4 +16,11 @@ public abstract class Question implements Serializable{
 	 * Displays the Question
 	 */
 	public abstract void display();
+	public abstract void setCorrectAnswer();
+	public String getPrompt(){
+		return prompt;
+	}
+	public void setPrompt(String prompt){
+		this.prompt = prompt;
+	}
 }

@@ -23,7 +23,7 @@ import Models.DocumentType;
  */
 public class TestIO {
 	// The location for saved Documents
-	private final static String SAVE_PATH = "./Documents";
+	private final static String SAVE_PATH = "Documents/";
 	
 	/**
 	 * Save a document with it's name as the filename
