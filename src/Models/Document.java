@@ -13,6 +13,10 @@ public class Document implements Serializable{
 	protected String name;
 	protected ArrayList<Question> questions;
 	public DocumentType docType;
+	
+	/**
+	 * @param docType The type of Document to create.
+	 */
 	public Document(DocumentType docType){
 		questions = new ArrayList<Question>();
 		name  = InputHandler.getString("What is the name of this Document?");
@@ -43,9 +47,18 @@ public class Document implements Serializable{
 	public String getName(){
 		return name;
 	}
+	/**
+	 * Gets the number of questions.
+	 * @return The number of questions.
+	 */
 	public int getQuestionCount() {
 		 return questions.size();
 	}
+	/**
+	 * Gets a question via a zero based index.
+	 * @param index The question's number-1
+	 * @return The question at the given index.
+	 */
 	public Question getQuestion(int index){
 		return questions.get(index);
 	}

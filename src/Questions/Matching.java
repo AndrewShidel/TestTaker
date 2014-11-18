@@ -2,6 +2,7 @@ package Questions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import Controllers.InputHandler;
 
 public class Matching  extends Question{
@@ -33,19 +34,52 @@ public class Matching  extends Question{
 		}
 	}
 	@Override
-	public void display() {
+	public void display(Boolean showCorrect) {
 		System.out.println(prompt);
 
 		for ( int i=0; i < col1Choices.size(); i++){
-			System.out.println(col1Choices.get(i) + "\t" + col2Choices.get(i));
+			System.out.println((i+1)+"). " + col1Choices.get(i) + "\t" + (i+1) + ")." + col2Choices.get(i));
 		}
 		
-		if (answer.size()>0){
+		if (answer.size()>0 && showCorrect){
 			System.out.println("The Correct answer is: ");
 			for (int key: answer.keySet()){
 				System.out.println(col1Choices.get(key-1) + "\t" + col2Choices.get(answer.get(key)-1));
 			}
 		}
 	}
-
+	@Override
+	public Object promptForAnswer() {
+		HashMap<Integer, Integer> userAnswer = new HashMap<Integer, Integer>();
+		for (int i=1; i<=col1Choices.size(); i++){
+			int choice = InputHandler.getInt("Which item in column 2 matches item "+i+" from column 1?");
+			userAnswer.put(i, choice);
+		}
+		return userAnswer;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public Boolean compareAnswer(Object input) {
+		HashMap<Integer, Integer> inputMap;
+		try{
+			inputMap = (HashMap<Integer, Integer>) input;
+		}catch(ClassCastException e){
+			return false;
+		}
+		for (Integer key: inputMap.keySet()){
+			if (!inputMap.get(key).equals(answer.get(key))) return false;
+		}
+		return true;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public void printAnswer(Object answer) {
+		HashMap<Integer, Integer> answerMap;
+		try {
+			answerMap = (HashMap<Integer, Integer>)answer;
+		} catch (ClassCastException e){return;}
+		for (Integer key: answerMap.keySet()){
+			System.out.println(key + "  ->  " + answerMap.get(key));
+		}
+	}
 }

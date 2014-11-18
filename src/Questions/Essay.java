@@ -8,9 +8,23 @@ public class Essay extends Question{
 		prompt = InputHandler.getString("Enter the prompt for your Essay question:");
 	}
 	@Override
-	public void display() {
+	public void display(Boolean showCorrect) {
 		System.out.println(prompt);
 	}
 	@Override
 	public void setCorrectAnswer() {}
+	
+	@Override
+	public Object promptForAnswer() {
+		return InputHandler.getString("");
+	}
+	@Override
+	public Boolean compareAnswer(Object input) {
+		return true;
+	}
+	@Override
+	public void printAnswer(Object answer) {
+		if (!(answer instanceof String)) return;
+		System.out.print((String)answer);
+	}
 }

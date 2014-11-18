@@ -3,7 +3,7 @@ import Models.Document;
 import Models.DocumentType;
 import Questions.*;
 
-public class TestCreator {
+public class DocCreator {
 	/**
 	 * Prompt the user for information, and create a new document
 	 * @param docType The type of document to create

@@ -5,7 +5,11 @@ import Questions.Essay;
 import Questions.MultipleChoice;
 import Questions.Question;
 
-public class TestModifier {
+public class DocModifier {
+	/**
+	 * Walks a user through editing a Test/Survay.
+	 * @param doc
+	 */
 	public static void modify(Document doc){
 		int choice = InputHandler.getInt("Enter a question number to edit, or 0 to view the test.", 0, doc.getQuestionCount());
 		if (choice==0) {

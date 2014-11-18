@@ -3,9 +3,17 @@
  * Description: A command line utility for creating, viewing, loading, and saving tests and survays.
  */
 
-import Controllers.*;
+import java.util.ArrayList;
+
+import Controllers.DocCreator;
+import Controllers.DocIO;
+import Controllers.DocModifier;
+import Controllers.DocTabulate;
+import Controllers.DocTaker;
+import Controllers.InputHandler;
 import Models.Document;
 import Models.DocumentType;
+import Models.TestAttempt;
 
 public class MainMenu {
 	private static Document currentDocument;
@@ -16,47 +24,58 @@ public class MainMenu {
 			int choice = showMainPrompt();
 			switch (choice){
 			case 1:
-				currentDocument = TestCreator.createTest(DocumentType.Survay);
+				currentDocument = DocCreator.createTest(DocumentType.Survay);
 				break;
 			case 2:
-				currentDocument = TestCreator.createTest(DocumentType.Test);
+				currentDocument = DocCreator.createTest(DocumentType.Test);
 				break;
 			case 3:
-			case 4:
 				if (currentDocument==null){
-					System.out.println("Please create or load a test/survay. ");
-					continue;
+					System.out.println("Select a Document to load.");
+					currentDocument = DocIO.load();
+					if (currentDocument==null) continue;
 				}
 				currentDocument.display();
 				break;
+			case 4:
+				currentDocument = DocIO.load();
+				break;
 			case 5:
-				currentDocument = TestIO.load(DocumentType.Survay);
+				if (currentDocument==null){
+					System.out.println("You must first create or load a document to save.");
+					continue;
+				}
+				DocIO.save(currentDocument);
 				break;
 			case 6:
-				currentDocument = TestIO.load(DocumentType.Test);
+				if (currentDocument==null){
+					System.out.println("Select a Document to modify.");
+					currentDocument = DocIO.load();
+					if (currentDocument==null) continue;
+				}
+				DocModifier.modify(currentDocument);
 				break;
 			case 7:
-			case 8:
 				if (currentDocument==null){
-					System.out.println("Please create or load a test/survay.");
-					continue;
+					System.out.println("Select a Document to take.");
+					currentDocument = DocIO.load();
+					if (currentDocument==null) continue;
 				}
-				TestIO.save(currentDocument);
+				DocTaker.takeTest(currentDocument);
+				break;
+			case 8:
+				System.out.println("\nTests are automaticly graded after being taken.");
+				System.out.println("Please take a test to get the grade.\n");
 				break;
 			case 9:
-			case 10:
 				if (currentDocument==null){
-					System.out.println("Please create or load a test/survay.");
-					continue;
+					System.out.println("Select a Document to tabulate.");
+					currentDocument = DocIO.load();
+					if (currentDocument==null) continue;
 				}
-				TestModifier.modify(currentDocument);
+				DocTabulate.tabulate(currentDocument.getName());
 				break;
-			case 11:
-			case 12:
-			case 13:
-			case 14:
-			case 15:
-			case 16:
+			case 10:
 				return;
 			}
 		}
@@ -69,27 +88,17 @@ public class MainMenu {
 		if (currentDocument!=null){
 			System.out.println("\nOpen Document: " + currentDocument.getName());
 		}
-		String displayStr = "1) Create a new Survey\n"
-				+"2) Create a new Test\n" 
-				+"3) Display a Survey\n"
-				+"4) Display a Test\n" 
-				+"5) Load a Survey\n"
-				+"6) Load a Test\n" 
-				+"7) Save a Survey\n"
-				+"8) Save a Test\n" 
-				+ "9) Modify an Existing Survey\n"
-				+"10) Modify an Existing Test\n"
-				+"11) Take a Survey\n"
-				+"12) Take a Test\n" 
-				+"13) Grade a Test\n"
-				+"14) Tabulate a Survey\n"
-				+"15) Tabulate a Test\n"
-				+"16) Quit \n";
-		int choice = InputHandler.getInt(displayStr);
-		if (choice<1 || choice > 16){
-			System.out.println("Invalid Choice.\n");
-			return showMainPrompt();
-		}
+		String displayStr = "1). Create a new Survey\n"
+				+"2). Create a new Test\n" 
+				+"3). Display a Document\n"
+				+"4). Load a Document\n"
+				+"5). Save a Document\n"
+				+"6). Modify an Existing Document\n"
+				+"7). Take a Survey/Test\n"
+				+"8). Grade a Test\n"
+				+"9). Tabulate a Document\n"
+				+"10). Quit \n";
+		int choice = InputHandler.getInt(displayStr, 1, 10);
 		return choice;
 	}
 }

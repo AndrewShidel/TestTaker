@@ -1,6 +1,7 @@
 package Questions;
 
 import java.util.HashMap;
+
 import Controllers.InputHandler;
 
 public class Ranking  extends Question{
@@ -40,16 +41,52 @@ public class Ranking  extends Question{
 		}
 	}
 	@Override
-	public void display() {
+	public void display(Boolean showCorrect) {
 		System.out.println(prompt);
+		int count = 1;
 		for (int key: items.keySet()){
-			System.out.println("\t-" + items.get(key));
+			System.out.println("\t" + count + "). " + items.get(key));
+			++count;
 		}
-		if (hasAnswer){
+		if (hasAnswer && showCorrect){
 			System.out.println("The correct ranking is:");
-			for (int key=1; key <= items.size(); key++){
-				System.out.println("\t-" + items.get(key));
+			for (int key=1; key <= items.size(); ++key){
+				System.out.println("\t" + key + "). " + items.get(key));
 			}
+		}
+	}
+	@Override
+	public Object promptForAnswer() {
+		String[] choices = InputHandler.getString("Enter the correct order in the form \"3 2 1 4\":").split("\\s");
+		int[] intChoices = new int[choices.length];
+		for (int i=0; i<choices.length; i++){
+			try{
+				intChoices[i]=Integer.parseInt(choices[i]);
+			}catch(NumberFormatException e){
+				System.out.println(choices[i] + " is not a number.");
+				return promptForAnswer();
+			}
+		}
+		return intChoices;
+	}
+	@Override
+	public Boolean compareAnswer(Object input) {
+		if (!(input instanceof int[])) return false;
+		int[] inputArray = (int[])input;
+		if (inputArray.length!=items.size()) return false;
+		int count = 0;
+		for (Integer key: items.keySet()){
+			if ( inputArray[count] != key) return false;
+			++count;
+		}
+		return true;
+	}
+	@Override
+	public void printAnswer(Object answer) {
+		if (!(answer instanceof int[])) return;
+		int[] choices = (int[]) answer;
+		for (int i=0; i<choices.length; i++){
+			System.out.println(i+"). "+choices[i]);
 		}
 	}
 }

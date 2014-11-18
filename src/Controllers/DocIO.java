@@ -15,15 +15,14 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 import Models.Document;
-import Models.DocumentType;
 
 /**
  * Handles input/output for Documents 
  * @author andrew
  */
-public class TestIO {
+public class DocIO {
 	// The location for saved Documents
-	private final static String SAVE_PATH = "Documents/";
+	public final static String SAVE_PATH = "Documents/";
 	
 	/**
 	 * Save a document with it's name as the filename
@@ -47,7 +46,7 @@ public class TestIO {
 	 * @param docType The type of document to load.
 	 * @return The newly created document.
 	 */
-	public static Document load(DocumentType docType){
+	public static Document load(){
 		File folder = new File(SAVE_PATH);
 		System.out.println(folder.getAbsoluteFile());
 		File[] listOfFiles = folder.listFiles();
@@ -60,24 +59,22 @@ public class TestIO {
 				count++;
 			} 
 		}
+		System.out.println(count + ") Quit");
 		if (files.size()==0){
 			System.out.println("There are no documents to load");
 			return null;
 		}
-		int choice = InputHandler.getInt("");
+		int choice = InputHandler.getInt("", 1, count);
+		if (choice==count) return null;
 		try(
-				InputStream file = new FileInputStream(SAVE_PATH + files.get(choice-1));
-				InputStream buffer = new BufferedInputStream(file);
-				ObjectInput input = new ObjectInputStream (buffer);
-				){
+			InputStream file = new FileInputStream(SAVE_PATH + files.get(choice-1));
+			InputStream buffer = new BufferedInputStream(file);
+			ObjectInput input = new ObjectInputStream (buffer);
+		){
 			Document document = (Document)input.readObject();
 			return document;
-		}
-		catch(ClassNotFoundException ex){
-			ex.printStackTrace();
-		}
-		catch(IOException ex){
-			ex.printStackTrace();
+		} catch (Exception e){
+			System.out.println("That is not a valid Document. ");
 		}
 		return null;
 	}
