@@ -3,8 +3,6 @@
  * Description: A command line utility for creating, viewing, loading, and saving tests and survays.
  */
 
-import java.util.ArrayList;
-
 import Controllers.DocCreator;
 import Controllers.DocIO;
 import Controllers.DocModifier;
@@ -13,7 +11,6 @@ import Controllers.DocTaker;
 import Controllers.InputHandler;
 import Models.Document;
 import Models.DocumentType;
-import Models.TestAttempt;
 
 public class MainMenu {
 	private static Document currentDocument;

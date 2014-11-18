@@ -4,7 +4,7 @@ import Controllers.InputHandler;
 
 public class TrueFalse  extends Question{
 	private static final long serialVersionUID = -4562128543020835558L;
-	private Boolean answer;
+	private Boolean answer = null;
 	public TrueFalse(boolean needsAnswer){
 		prompt = InputHandler.getString("Enter the prompt for your True/False question:");
 		if (needsAnswer){

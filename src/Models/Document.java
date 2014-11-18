@@ -26,11 +26,13 @@ public class Document implements Serializable{
 	 * Displays the document
 	 */
 	public void display(){
+		System.out.println(name);
 		int count = 0;
 		for (Question question: questions){
 			count++;
 			System.out.print(count + ").");
-			question.display();
+			question.display(docType.equals(DocumentType.Test));
+			System.out.println();
 		}
 	}
 	/**

@@ -21,7 +21,7 @@ public class DocTaker {
 				if (!correct) System.out.println("WRONG!!!");
 				attempt.addAnswer(answer, correct);
 			}else{
-				attempt.addAnswer(question);
+				attempt.addAnswer(answer);
 			}
 		}
 		attempt.save();

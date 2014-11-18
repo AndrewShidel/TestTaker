@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Document;
+import Models.DocumentType;
 import Questions.Essay;
 import Questions.MultipleChoice;
 import Questions.Question;
@@ -24,7 +25,7 @@ public class DocModifier {
 			question.setPrompt(InputHandler.getString("Enter a new prompt:"));
 		}
 
-		if (question instanceof MultipleChoice){
+		if (question instanceof MultipleChoice && doc.docType.equals(DocumentType.Test)){
 			if (InputHandler.getYesOrNo("Do you wish to modify choices (yes/no)?")){
 				question.display();
 				int index = InputHandler.getInt("Which choice do you want to modify?", 1, doc.getQuestionCount());
@@ -32,7 +33,7 @@ public class DocModifier {
 				((MultipleChoice) question).changeAnswer(index, newAnswer);
 			}
 		}
-		if (!(question instanceof Essay)){
+		if (!(question instanceof Essay) && doc.docType.equals(DocumentType.Test)){
 			if (InputHandler.getYesOrNo("Do you wish to modify the correct answer (yes/no)?")){
 				question.display();
 				question.setCorrectAnswer();

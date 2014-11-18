@@ -31,7 +31,6 @@ public class DocTabulate {
  		ArrayList<String> files = new ArrayList<String>();
 		for (int i = 0; i < listOfFiles.length; i++) {
 			if (listOfFiles[i].isFile()) {
-				files.add(listOfFiles[i].getName());
 				try(
 						InputStream file = new FileInputStream(listOfFiles[i]);
 						InputStream buffer = new BufferedInputStream(file);
@@ -40,12 +39,16 @@ public class DocTabulate {
 					attempts.add((TestAttempt)input.readObject());
 				}
 				catch(ClassNotFoundException ex){
-					ex.printStackTrace();
+					continue;
+				}catch(IOException ex){
+					continue;
 				}
-				catch(IOException ex){
-					ex.printStackTrace();
-				}
+				files.add(listOfFiles[i].getName());
 			}
+		}
+		if (attempts.size()==0) {
+			System.out.println("No one has taken this Test/Survay yet.");
+			return;
 		}
 		Document doc = attempts.get(0).getDoc(); // We can assume that all entries have the same document.
 		ArrayList< TabulatedQuestion > answers = new ArrayList<>();
@@ -62,7 +65,7 @@ public class DocTabulate {
 			System.out.println("Question " + (i+1) + " has " + answersForQuestion.size() + " different answers.");
 			for (Object key: answersForQuestion){
 				doc.getQuestion(i).printAnswer(key);
-				System.out.println("\nUsed " + answers.get(i).answers.get(key) + " times.");
+				System.out.println("\nUsed " + answers.get(i).answers.get(key) + " times.\n");
 			}
 		}
 	}

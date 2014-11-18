@@ -38,7 +38,8 @@ public class Matching  extends Question{
 		System.out.println(prompt);
 
 		for ( int i=0; i < col1Choices.size(); i++){
-			System.out.println((i+1)+"). " + col1Choices.get(i) + "\t" + (i+1) + ")." + col2Choices.get(i));
+			//System.out.println((i+1)+"). " + col1Choices.get(i) + "\t" + (i+1) + ")." + col2Choices.get(i));
+			System.out.format("\t"+(i+1)+").%-15s"+(i+1) + ").%-15s\n", col1Choices.get(i), col2Choices.get(i));
 		}
 		
 		if (answer.size()>0 && showCorrect){

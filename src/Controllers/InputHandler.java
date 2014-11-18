@@ -6,6 +6,7 @@ import java.util.Scanner;
 /**
  * A utility class for handling user input.
  */
+@SuppressWarnings("resource")
 public class InputHandler {
 	/**
 	 * Get an integer from the command line.
